@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Bookmark, CheckSquare } from "lucide-react";
 import { Exercise } from "@/types/workout";
+import CardActionsButton from "./components/CardActionsButton";
 
 const WorkoutDetailsPage = async ({
 	params,
@@ -107,23 +108,7 @@ const WorkoutDetailsPage = async ({
 					</section>
 
 					{/* Actions */}
-					<div className="mt-6 flex flex-wrap gap-3">
-						<button
-							type="button"
-							className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-medium text-black transition-opacity hover:opacity-90"
-						>
-							<CheckSquare size={14} />
-							Add to today's plan
-						</button>
-
-						<button
-							type="button"
-							className="flex items-center gap-2 rounded-lg border border-white/15 px-4 py-2.5 text-xs font-medium text-white transition-colors hover:bg-white/5"
-						>
-							<Bookmark size={14} />
-							Save for later
-						</button>
-					</div>
+					<CardActionsButton workout={workout} />
 				</div>
 			</div>
 		</main>

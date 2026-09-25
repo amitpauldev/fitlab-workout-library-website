@@ -2,8 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock3, Flame, Star } from "lucide-react";
 import { Exercise } from "@/types/workout";
+import WorkoutListCardRemove from "@/app/my-plan/components/WorkoutListCardRemove";
+import AddToPlanButton from "@/app/my-plan/components/AddToPlanButton";
 
-const WorkoutListCard = ({ workout }: { workout: Exercise }) => {
+const WorkoutListCard = ({
+	workout,
+	belongsToPlan,
+}: {
+	workout: Exercise;
+	belongsToPlan: boolean;
+}) => {
 	const { id, name, image, equipment, duration, caloriesBurned, rating } =
 		workout;
 
@@ -53,18 +61,17 @@ const WorkoutListCard = ({ workout }: { workout: Exercise }) => {
 			{/* Actions */}
 			<div className="flex flex-col sm:flex-row shrink-0 items-center gap-2 mr-0 sm:mr-10">
 				<Link
-					href={`/workout/${id}`}
+					href={`/workouts/${id}`}
 					className="rounded-full border border-white/15 px-4 py-2 text-[10px] font-medium transition-colors hover:bg-white/5"
 				>
 					View Details
 				</Link>
 
-				<button
-					type="button"
-					className="rounded-full bg-primary px-3 py-2 text-[10px] font-semibold text-black transition-opacity hover:opacity-90 cursor-pointer"
-				>
-					Mark as Done
-				</button>
+				{belongsToPlan ? (
+					<WorkoutListCardRemove cardId={id} />
+				) : (
+					<AddToPlanButton workout={workout} />
+				)}
 			</div>
 		</article>
 	);

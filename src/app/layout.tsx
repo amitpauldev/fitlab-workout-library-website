@@ -3,6 +3,9 @@ import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { MyPlanProvider } from "@/context/MyPlanContext";
+import { SavedWorkoutProvider } from "@/context/SavedWorkoutContext";
+import { ToastContainer } from "react-toastify";
 
 const oswald = Oswald({
 	variable: "--font-oswald",
@@ -26,9 +29,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 			className={`${oswald.variable} ${inter.variable} h-full antialiased`}
 		>
 			<body className="min-h-full flex flex-col">
-				<Navbar />
-				{children}
-				<Footer />
+				<MyPlanProvider>
+					<SavedWorkoutProvider>
+						<Navbar />
+						{children}
+						<Footer />
+
+						<ToastContainer />
+					</SavedWorkoutProvider>
+				</MyPlanProvider>
 			</body>
 		</html>
 	);

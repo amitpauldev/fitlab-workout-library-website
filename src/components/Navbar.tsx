@@ -4,8 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import logo from "../../public/assets/logo.png";
+import { usePathname } from "next/navigation";
+import { useMyPlan } from "@/context/MyPlanContext";
+import { useSavedWorkout } from "@/context/SavedWorkoutContext";
 
 const Navbar = () => {
+	const pathname = usePathname();
+	const { planWorkouts } = useMyPlan();
+	const { savedWorkouts } = useSavedWorkout();
+
 	const [showNav, setShowNav] = useState(false);
 
 	const openNav = () => {
@@ -37,13 +44,13 @@ const Navbar = () => {
 					<div className="hidden sm:flex items-center text-[12px] text-muted">
 						<Link
 							href="/workouts"
-							className="py-1 px-3 rounded-xl mr-4 hover:text-primary hover:bg-primary-muted"
+							className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/workouts" ? "text-primary bg-primary-muted" : ""}`}
 						>
 							Workouts
 						</Link>
 						<Link
 							href="/my-plan"
-							className="py-1 px-3 rounded-xl hover:text-primary hover:bg-primary-muted"
+							className={`py-1 px-3 rounded-xl ${pathname === "/my-plan" ? "text-primary bg-primary-muted" : ""}`}
 						>
 							My Plan
 						</Link>
@@ -52,13 +59,13 @@ const Navbar = () => {
 						<div className="flex items-center gap-2">
 							Plan{" "}
 							<span className="py-0.5 px-1.5 rounded-full bg-primary text-black font-bold">
-								0
+								{planWorkouts.length}
 							</span>
 						</div>
 						<div className="flex items-center gap-2">
 							Saved{" "}
 							<span className="py-1 px-2 border border-primary-muted rounded-full text-white font-bold">
-								0
+								{savedWorkouts.length}
 							</span>
 						</div>
 					</div>

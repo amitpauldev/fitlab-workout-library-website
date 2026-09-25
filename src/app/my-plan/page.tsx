@@ -1,14 +1,14 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import EmptyState from "./components/EmptyState";
 import WorkoutListCard from "@/components/WorkoutListCard";
-import { Exercise } from "@/types/workout";
+import { useMyPlan } from "@/context/MyPlanContext";
+import { useSavedWorkout } from "@/context/SavedWorkoutContext";
 
-const page = async () => {
-	const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/1`);
-	if (!res.ok) {
-		throw new Error("Failed to fetch workout");
-	}
-	const workout: Exercise = await res.json();
+const MyPlan = () => {
+	const [currTab, setCurrTab] = useState("Today's Plan");
+	const { planWorkouts } = useMyPlan();
+	const { savedWorkouts } = useSavedWorkout();
 
 	return (
 		<main className="container mx-auto w-full mt-15 px-4 py-8 md:px-6 lg:py-12">
@@ -55,10 +55,18 @@ const page = async () => {
 
 			<div className="flex  flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-center text-sm mt-10 mb-6">
 				<div className="flex bg-card p-1 border border-white/10 rounded-xl">
-					<button className="text-muted px-4.5 py-1.5 rounded-xl">
+					<button
+						className={`px-4.5 py-1.5 rounded-lg cursor-pointer ${currTab === "Today's Plan" ? "bg-primary-muted border border-white/10 text-white" : "text-muted"}`}
+						onClick={() => setCurrTab("Today's Plan")}
+					>
 						Today's Plan
 					</button>
-					<button className="text-white px-4.5 py-1.5 rounded-xl">Saved</button>
+					<button
+						onClick={() => setCurrTab("Saved")}
+						className={`px-4.5 py-1.5 rounded-lg cursor-pointer ${currTab === "Saved" ? "bg-primary-muted border border-white/10 text-white" : "text-muted"}`}
+					>
+						Saved
+					</button>
 				</div>
 
 				<div className="flex">
@@ -73,13 +81,32 @@ const page = async () => {
 			</div>
 
 			<div>
-				{/* <EmptyState /> */}
-				<WorkoutListCard workout={workout} />
-				<WorkoutListCard workout={workout} />
-				<WorkoutListCard workout={workout} />
+				{currTab === "Today's Plan" ? (
+					planWorkouts.length === 0 ? (
+						<EmptyState />
+					) : (
+						planWorkouts.map((workout) => (
+							<WorkoutListCard
+								workout={workout}
+								key={workout.id}
+								belongsToPlan={true}
+							/>
+						))
+					)
+				) : savedWorkouts.length === 0 ? (
+					<EmptyState />
+				) : (
+					savedWorkouts.map((workout) => (
+						<WorkoutListCard
+							workout={workout}
+							key={workout.id}
+							belongsToPlan={false}
+						/>
+					))
+				)}
 			</div>
 		</main>
 	);
 };
 
-export default page;
+export default MyPlan;
