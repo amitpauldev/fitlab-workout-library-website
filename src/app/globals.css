@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-	--background: #15171d;
+	--background: #0c0d10;
 	--foreground: #ffffff;
 
 	--primary: #c2f800;
 	--primary-muted: #1a2312;
 
-	--card-background: #222630;
+	--card-background: #15171d;
 	--text-muted: #9ca3af;
 
 	--blackish: #090a0d;
+	--stroke-muted: #1c1f26;
 }
 
 @theme {
@@ -19,6 +20,7 @@
 	--color-card: var(--card-background);
 	--color-muted: var(--text-muted);
 	--color-blackish: var(--blackish);
+	--color-stroke-muted: var(--stroke-muted);
 
 	--font-oswald: var(--font-oswald);
 	--font-inter: var(--font-inter);
