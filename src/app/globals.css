@@ -19,6 +19,9 @@
 	--color-card: var(--card-background);
 	--color-muted: var(--text-muted);
 	--color-blackish: var(--blackish);
+
+	--font-oswald: var(--font-oswald);
+	--font-inter: var(--font-inter);
 }
 
 @layer base {
