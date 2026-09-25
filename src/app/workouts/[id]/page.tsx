@@ -33,7 +33,7 @@ const WorkoutDetailsPage = async ({
 	} = workout;
 
 	return (
-		<main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-6 lg:py-12">
+		<main className="container mx-auto w-full mt-15 px-4 py-8 md:px-6 lg:py-12">
 			<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 				{/* Image */}
 				<div className="relative min-h-[400px] overflow-hidden rounded-xl lg:min-h-[540px]">

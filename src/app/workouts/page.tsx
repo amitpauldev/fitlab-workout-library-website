@@ -7,7 +7,7 @@ const Workout = async () => {
 	const data = await res.json();
 
 	return (
-		<section className="container mx-auto px-8 mb-25 mt-40">
+		<section className="container mx-auto px-8 mb-25 mt-32">
 			<div>
 				<h2 className="text-2xl font-black uppercase tracking-wide">
 					Workouts
@@ -18,7 +18,7 @@ const Workout = async () => {
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
 				{data.map((workout: Exercise) => (
-					<Link key={workout.id} href={`/workout/${workout.id}`}>
+					<Link key={workout.id} href={`/workouts/${workout.id}`}>
 						<WorkoutCard workout={workout} />
 					</Link>
 				))}

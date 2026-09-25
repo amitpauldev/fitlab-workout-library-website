@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import logo from "../../public/assets/logo.png";
 
 const Navbar = () => {
 	const [showNav, setShowNav] = useState(false);
@@ -16,17 +18,25 @@ const Navbar = () => {
 
 	return (
 		<header>
-			<div className="sticky top-0 z-50 flex items-center w-full shadow bg-blackish opacity-95 backdrop-blur">
+			<div className="fixed top-0 z-50 flex items-center w-full shadow bg-blackish opacity-95 backdrop-blur">
 				<nav className="container mx-auto flex items-center justify-between p-6">
-					<div className="flex items-center shrink-0 text-white mr-6">
-						<img src="assets/logo.png" alt="logo" className="w-5 mr-2" />
-						<span className="font-oswald font-bold text-lg tracking-tight">
-							FITLOG
-						</span>
-					</div>
+					<Link href="/">
+						<div className="flex items-center shrink-0 text-white mr-6">
+							<Image
+								src={logo}
+								alt="logo"
+								width={20}
+								height={20}
+								className="mr-2"
+							/>
+							<span className="font-oswald font-bold text-lg tracking-tight">
+								FITLOG
+							</span>
+						</div>
+					</Link>
 					<div className="hidden sm:flex items-center text-[12px] text-muted">
 						<Link
-							href="/"
+							href="/workouts"
 							className="py-1 px-3 rounded-xl mr-4 hover:text-primary hover:bg-primary-muted"
 						>
 							Workouts
@@ -83,7 +93,10 @@ const Navbar = () => {
 				>
 					<div className="flex justify-between wrapper pl-6 py-4">
 						<div className="flex flex-col gap-1.5 mt-15">
-							<Link href="/" className="py-1 px-3 rounded-xl text-muted ">
+							<Link
+								href="/workouts"
+								className="py-1 px-3 rounded-xl text-muted "
+							>
 								Workouts
 							</Link>
 							<Link href="/my-plan" className="py-1 px-3 rounded-xl text-muted">

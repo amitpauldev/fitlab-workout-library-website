@@ -3,7 +3,7 @@ import banner from "../../public/assets/banner.png";
 
 const Hero = () => {
 	return (
-		<section className="container mx-auto py-12 px-8">
+		<section className="container mx-auto mt-20 py-12 px-8">
 			<div className="rounded-2xl border border-stroke-muted bg-card flex flex-col md:flex-row items-center justify-between p-5 md:p-15">
 				<div className="w-full md:w-1/2 text-center md:text-left">
 					<span className="text-sm  text-primary">WORKOUT LIBRARY</span>
