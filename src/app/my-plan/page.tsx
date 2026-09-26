@@ -4,11 +4,53 @@ import EmptyState from "./components/EmptyState";
 import WorkoutListCard from "@/components/WorkoutListCard";
 import { useMyPlan } from "@/context/MyPlanContext";
 import { useSavedWorkout } from "@/context/SavedWorkoutContext";
+import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 
 const MyPlan = () => {
 	const [currTab, setCurrTab] = useState("Today's Plan");
 	const { planWorkouts } = useMyPlan();
 	const { savedWorkouts } = useSavedWorkout();
+
+	const [sortBy, setSortBy] = useState("duration");
+	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
+	const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setSortBy(e.target.value);
+	};
+
+	const sortedPlanWorkouts = planWorkouts.sort((a, b) => {
+		if (sortBy === "duration") {
+			if (sortOrder === "asc") {
+				return a.duration - b.duration;
+			} else {
+				return b.duration - a.duration;
+			}
+		} else if (sortBy === "rating") {
+			if (sortOrder === "asc") {
+				return a.rating - b.rating;
+			} else {
+				return b.rating - a.rating;
+			}
+		}
+		return 0;
+	});
+
+	const sortedSavedWorkouts = savedWorkouts.sort((a, b) => {
+		if (sortBy === "duration") {
+			if (sortOrder === "asc") {
+				return a.duration - b.duration;
+			} else {
+				return b.duration - a.duration;
+			}
+		} else if (sortBy === "rating") {
+			if (sortOrder === "asc") {
+				return a.rating - b.rating;
+			} else {
+				return b.rating - a.rating;
+			}
+		}
+		return 0;
+	});
 
 	return (
 		<main className="container mx-auto w-full mt-15 px-4 py-8 md:px-6 lg:py-12">
@@ -30,8 +72,12 @@ const MyPlan = () => {
 						<span className="text-sm font-semibold tracking-wide text-muted">
 							Exercise
 						</span>
-						<span className="text-2xl text-primary font-oswald font-extrabold">
-							0
+						<span
+							className={`text-2xl font-oswald font-extrabold ${currTab === "Today's Plan" ? "text-primary" : "text-white"}`}
+						>
+							{currTab === "Today's Plan"
+								? planWorkouts.length
+								: savedWorkouts.length}
 						</span>
 					</div>
 					<div className="flex flex-col gap-2">
@@ -39,7 +85,9 @@ const MyPlan = () => {
 							Minutes
 						</span>
 						<span className="text-2xl text-white font-oswald font-extrabold">
-							0
+							{currTab === "Today's Plan"
+								? planWorkouts.reduce((acc, curr) => acc + curr.duration, 0)
+								: savedWorkouts.reduce((acc, curr) => acc + curr.duration, 0)}
 						</span>
 					</div>
 					<div className="flex flex-col gap-2">
@@ -47,7 +95,15 @@ const MyPlan = () => {
 							Calories
 						</span>
 						<span className="text-2xl text-white font-oswald font-extrabold">
-							0
+							{currTab === "Today's Plan"
+								? planWorkouts.reduce(
+										(acc, curr) => acc + curr.caloriesBurned,
+										0,
+									)
+								: savedWorkouts.reduce(
+										(acc, curr) => acc + curr.caloriesBurned,
+										0,
+									)}
 						</span>
 					</div>
 				</div>
@@ -70,13 +126,29 @@ const MyPlan = () => {
 				</div>
 
 				<div className="flex">
-					<button className="text-muted pl-4 pr-6 py-2 rounded-xl">
-						Sort By
-					</button>
-					<select className="text-white pl-4 pr-6 py-2 rounded-xl bg-card border border-white/10">
-						<option value="1">Duration</option>
-						<option value="2">Rating</option>
+					<button className="text-muted px-4 py-2 rounded-xl">Sort By:</button>
+					<select
+						onChange={handleSortByChange}
+						className="text-white px-4 py-2 rounded-xl bg-card border border-white/10 hover:border-mist-400 transition appearance-none cursor-pointer"
+					>
+						<option value="duration" className="bg-card text-white rounded-2xl">
+							Duration
+						</option>
+						<option value="rating" className="bg-card text-white">
+							Rating
+						</option>
 					</select>
+
+					<button
+						onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+						className="text-white p-3 ml-1 rounded-xl bg-card border border-white/10 cursor-pointer hover:border-mist-400 transition"
+					>
+						{sortOrder === "asc" ? (
+							<ArrowUpNarrowWide size={17} />
+						) : (
+							<ArrowDownWideNarrow size={17} />
+						)}
+					</button>
 				</div>
 			</div>
 
@@ -85,7 +157,7 @@ const MyPlan = () => {
 					planWorkouts.length === 0 ? (
 						<EmptyState />
 					) : (
-						planWorkouts.map((workout) => (
+						sortedPlanWorkouts.map((workout) => (
 							<WorkoutListCard
 								workout={workout}
 								key={workout.id}
@@ -96,7 +168,7 @@ const MyPlan = () => {
 				) : savedWorkouts.length === 0 ? (
 					<EmptyState />
 				) : (
-					savedWorkouts.map((workout) => (
+					sortedSavedWorkouts.map((workout) => (
 						<WorkoutListCard
 							workout={workout}
 							key={workout.id}

@@ -1,7 +1,7 @@
 "use client";
 
 import { Exercise } from "@/types/workout";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type SavedWorkoutContextType = {
 	savedWorkouts: Exercise[];
@@ -18,6 +18,25 @@ export function SavedWorkoutProvider({
 	children: React.ReactNode;
 }) {
 	const [savedWorkouts, setSavedWorkouts] = useState<Exercise[]>([]);
+
+	const [isHydrated, setIsHydrated] = useState(false);
+
+	// Load from localStorage
+	useEffect(() => {
+		const stored = localStorage.getItem("saved-workouts");
+		if (stored) {
+			setSavedWorkouts(JSON.parse(stored));
+		}
+
+		setIsHydrated(true);
+	}, []);
+
+	// Save to localStorage
+	useEffect(() => {
+		if (!isHydrated) return;
+
+		localStorage.setItem("saved-workouts", JSON.stringify(savedWorkouts));
+	}, [savedWorkouts]);
 
 	return (
 		<SavedWorkoutContext.Provider value={{ savedWorkouts, setSavedWorkouts }}>
