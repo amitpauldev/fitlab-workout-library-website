@@ -7,6 +7,7 @@ import logo from "../../public/assets/logo.png";
 import { usePathname } from "next/navigation";
 import { useMyPlan } from "@/context/MyPlanContext";
 import { useSavedWorkout } from "@/context/SavedWorkoutContext";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
 	const pathname = usePathname();
@@ -43,6 +44,12 @@ const Navbar = () => {
 					</Link>
 					<div className="hidden sm:flex items-center text-[12px] text-muted">
 						<Link
+							href="/"
+							className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/" ? "text-primary bg-primary-muted" : ""}`}
+						>
+							Home
+						</Link>
+						<Link
 							href="/workouts"
 							className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/workouts" ? "text-primary bg-primary-muted" : ""}`}
 						>
@@ -77,7 +84,7 @@ const Navbar = () => {
 					className="sm:hidden p-2 mr-3 cursor-pointer rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
 					aria-label={showNav ? "Close menu" : "Open menu"}
 				>
-					<img src="/assets/hamburger.png" />
+					<Menu />
 				</button>
 			</div>
 
@@ -101,12 +108,24 @@ const Navbar = () => {
 					<div className="flex justify-between wrapper pl-6 py-4">
 						<div className="flex flex-col gap-1.5 mt-15">
 							<Link
+								onClick={() => closeNav()}
+								href="/"
+								className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/" ? "text-primary bg-primary-muted" : "text-muted"}`}
+							>
+								Home
+							</Link>
+							<Link
+								onClick={() => closeNav()}
 								href="/workouts"
-								className="py-1 px-3 rounded-xl text-muted "
+								className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/workouts" ? "text-primary bg-primary-muted" : "text-muted"}`}
 							>
 								Workouts
 							</Link>
-							<Link href="/my-plan" className="py-1 px-3 rounded-xl text-muted">
+							<Link
+								onClick={() => closeNav()}
+								href="/my-plan"
+								className={`py-1 px-3 rounded-xl ${pathname === "/my-plan" ? "text-primary bg-primary-muted" : "text-muted"}`}
+							>
 								My Plan
 							</Link>
 						</div>
@@ -114,10 +133,10 @@ const Navbar = () => {
 						<button
 							type="button"
 							onClick={closeNav}
-							className="self-start md:hidden p-2 mr-4 mt-2 cursor-pointer rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+							className="self-start md:hidden p-2 mr-4 cursor-pointer rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
 							aria-label={showNav ? "Close menu" : "Open menu"}
 						>
-							<img src="assets/x-button.png" className="w-4" />
+							<X className="text-muted" />
 						</button>
 					</div>
 				</div>
