@@ -10,13 +10,16 @@ const CardActionsButton = ({ workout }: { workout: Exercise }) => {
 	const { planWorkouts, setPlanWorkouts } = useMyPlan();
 	const { savedWorkouts, setSavedWorkouts } = useSavedWorkout();
 
+	// Add a new property to the workout object called markedAsDone
+	const workoutWithMarkedAsDone = { ...workout, markedAsDone: false };
+
 	const handlePlanWorkouts = () => {
 		const alreadyPlanned = planWorkouts.some(
 			(planWorkout) => planWorkout.id === workout.id,
 		);
 
 		if (!alreadyPlanned) {
-			setPlanWorkouts([...planWorkouts, workout]);
+			setPlanWorkouts([...planWorkouts, workoutWithMarkedAsDone]);
 			toast.success("Workout added to your plan");
 		} else {
 			toast.warn("Workout already in your plan");
@@ -29,7 +32,7 @@ const CardActionsButton = ({ workout }: { workout: Exercise }) => {
 		);
 
 		if (!alreadySaved) {
-			setSavedWorkouts([...savedWorkouts, workout]);
+			setSavedWorkouts([...savedWorkouts, workoutWithMarkedAsDone]);
 			toast.success("Workout saved for later");
 		} else {
 			toast.warn("Workout already saved");

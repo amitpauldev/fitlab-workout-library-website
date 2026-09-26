@@ -13,3 +13,5 @@ export type Exercise = {
 	description: string;
 	instructions: string[];
 };
+
+export type WorkoutWithMarkedAsDone = Exercise & { markedAsDone?: boolean };

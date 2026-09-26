@@ -1,17 +1,21 @@
 "use client";
 
-import { Exercise } from "@/types/workout";
+import { WorkoutWithMarkedAsDone } from "@/types/workout";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type MyPlanContextType = {
-	planWorkouts: Exercise[];
-	setPlanWorkouts: React.Dispatch<React.SetStateAction<Exercise[]>>;
+	planWorkouts: WorkoutWithMarkedAsDone[];
+	setPlanWorkouts: React.Dispatch<
+		React.SetStateAction<WorkoutWithMarkedAsDone[]>
+	>;
 };
 
 const MyPlanContext = createContext<MyPlanContextType | undefined>(undefined);
 
 export function MyPlanProvider({ children }: { children: React.ReactNode }) {
-	const [planWorkouts, setPlanWorkouts] = useState<Exercise[]>([]);
+	const [planWorkouts, setPlanWorkouts] = useState<WorkoutWithMarkedAsDone[]>(
+		[],
+	);
 
 	const [isHydrated, setIsHydrated] = useState(false);
 

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import EmptyState from "./components/EmptyState";
-import WorkoutListCard from "@/components/WorkoutListCard";
+import WorkoutListCard from "@/app/my-plan/components/WorkoutListCard";
 import { useMyPlan } from "@/context/MyPlanContext";
 import { useSavedWorkout } from "@/context/SavedWorkoutContext";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";

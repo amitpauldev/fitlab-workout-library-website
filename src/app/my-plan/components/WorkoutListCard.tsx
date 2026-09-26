@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock3, Flame, Star } from "lucide-react";
 import { Exercise } from "@/types/workout";
-import WorkoutListCardRemove from "@/app/my-plan/components/WorkoutListCardRemove";
-import AddToPlanButton from "@/app/my-plan/components/AddToPlanButton";
+import SavedListCardAction from "@/app/my-plan/components/SavedListCardAction";
+import PlanListCardAction from "@/app/my-plan/components/PlanListCardAction";
 
 const WorkoutListCard = ({
 	workout,
@@ -18,18 +18,19 @@ const WorkoutListCard = ({
 	return (
 		<article className="flex w-full items-center gap-4 rounded-xl border border-white/10 bg-card p-3 mb-3 text-white transition-colors hover:border-white/15">
 			{/* Image */}
-			<div className="relative h-16 w-28 shrink-0 overflow-hidden rounded-lg">
+			<div className="relative h-25 w-28 sm:h-16 sm:w-28 shrink-0 overflow-hidden rounded-lg">
 				<Image
 					src={image}
 					alt={name}
-					fill
+					width={200}
+					height={50}
 					className="object-cover"
 					sizes="112px"
 				/>
 			</div>
 
 			{/* Workout Info */}
-			<div className="min-w-0 flex-1">
+			<div className="min-w-0 flex-1 self-start mt-1.5 sm:mt-0 sm:self-center">
 				<h3 className="truncate text-xs font-bold uppercase tracking-wide">
 					{name}
 				</h3>
@@ -59,7 +60,7 @@ const WorkoutListCard = ({
 			</div>
 
 			{/* Actions */}
-			<div className="flex flex-col sm:flex-row shrink-0 items-center gap-2 mr-0 sm:mr-10">
+			<div className="flex flex-col sm:flex-row shrink-0 items-center gap-2 sm:mr-0">
 				<Link
 					href={`/workouts/${id}`}
 					className="rounded-full border border-white/15 px-4 py-2 text-[10px] font-medium transition-colors hover:bg-white/5"
@@ -68,9 +69,11 @@ const WorkoutListCard = ({
 				</Link>
 
 				{belongsToPlan ? (
-					<WorkoutListCardRemove cardId={id} />
+					<>
+						<PlanListCardAction cardId={id} />
+					</>
 				) : (
-					<AddToPlanButton workout={workout} />
+					<SavedListCardAction workout={workout} cardId={id} />
 				)}
 			</div>
 		</article>
