@@ -1,5 +1,6 @@
 import Image from "next/image";
 import banner from "../../public/assets/banner.png";
+import Link from "next/link";
 
 const Hero = () => {
 	return (
@@ -15,9 +16,11 @@ const Hero = () => {
 						you're a beginner or an experienced athlete, FITLOG is the perfect
 						place to get started.
 					</p>
-					<button className="bg-primary text-sm font-bold text-black py-2 px-4 rounded-md cursor-pointer hover:opacity-80">
-						BROWSE WORKOUTS
-					</button>
+					<Link href="/workouts">
+						<button className="bg-primary text-sm font-bold text-black py-2 px-4 rounded-md cursor-pointer hover:opacity-80">
+							BROWSE WORKOUTS
+						</button>
+					</Link>
 				</div>
 
 				<div className="w-full md:w-1/2 mt-16 md:mt-0">
