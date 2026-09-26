@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { MyPlanProvider } from "@/context/MyPlanContext";
 import { SavedWorkoutProvider } from "@/context/SavedWorkoutContext";
-import { ToastContainer } from "react-toastify";
+import { Flip, Slide, ToastContainer } from "react-toastify";
 
 const oswald = Oswald({
 	variable: "--font-oswald",
@@ -35,7 +35,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 						{children}
 						<Footer />
 
-						<ToastContainer />
+						<ToastContainer
+							position="top-right"
+							autoClose={2500}
+							limit={4}
+							hideProgressBar={false}
+							newestOnTop
+							closeOnClick
+							rtl={false}
+							pauseOnFocusLoss
+							draggable
+							pauseOnHover={false}
+							theme="dark"
+							transition={Flip}
+						/>
 					</SavedWorkoutProvider>
 				</MyPlanProvider>
 			</body>
