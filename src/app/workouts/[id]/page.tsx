@@ -1,7 +1,15 @@
 import Image from "next/image";
-import { Bookmark, CheckSquare } from "lucide-react";
 import { Exercise } from "@/types/workout";
 import CardActionsButton from "./components/CardActionsButton";
+
+export const generateStaticParams = async () => {
+	const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
+	const workouts: Exercise[] = await res.json();
+
+	return workouts.map((workout) => ({
+		id: String(workout.id),
+	}));
+};
 
 const WorkoutDetailsPage = async ({
 	params,
