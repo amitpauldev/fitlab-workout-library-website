@@ -12,7 +12,6 @@ FitLab is a modern and responsive workout library website built with Next.js and
 - **Workout Details** — View detailed information about individual workouts using dynamic routes.
 - **Personal Workout Plan** — Add exercises to a personalized workout plan and manage selected workouts.
 - **Responsive Design** — Optimized for mobile, tablet, and desktop screen sizes.
-- **Error & 404 Handling** — User-friendly error and not-found pages for failed requests and unavailable workouts.
 
 ## 🛠️ Technologies Used
 
@@ -57,7 +56,7 @@ Make sure you have the following installed:
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/fitlab.git
+git clone https://github.com/amitpauldev/fitlab-webapp
 ```
 
 Navigate to the project directory:
