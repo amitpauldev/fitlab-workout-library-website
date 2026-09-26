@@ -44,14 +44,8 @@ const Navbar = () => {
 					</Link>
 					<div className="hidden sm:flex items-center text-[12px] text-muted">
 						<Link
-							href="/"
-							className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/" ? "text-primary bg-primary-muted" : ""}`}
-						>
-							Home
-						</Link>
-						<Link
 							href="/workouts"
-							className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/workouts" ? "text-primary bg-primary-muted" : ""}`}
+							className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/workouts" || pathname === "/" ? "text-primary bg-primary-muted" : ""}`}
 						>
 							Workouts
 						</Link>
@@ -62,20 +56,22 @@ const Navbar = () => {
 							My Plan
 						</Link>
 					</div>
-					<div className="flex items-center gap-3 text-[12px] text-muted">
-						<div className="flex items-center gap-2">
-							Plan{" "}
-							<span className="py-0.5 px-1.5 rounded-full bg-primary text-black font-bold">
-								{planWorkouts.length}
-							</span>
+					<Link href="/my-plan">
+						<div className="flex items-center gap-3 text-[12px] text-muted">
+							<div className="flex items-center gap-2">
+								Plan{" "}
+								<span className="py-0.5 px-1.5 rounded-full bg-primary text-black font-bold">
+									{planWorkouts.length}
+								</span>
+							</div>
+							<div className="flex items-center gap-2">
+								Saved{" "}
+								<span className="py-1 px-2 border border-primary-muted rounded-full text-white font-bold">
+									{savedWorkouts.length}
+								</span>
+							</div>
 						</div>
-						<div className="flex items-center gap-2">
-							Saved{" "}
-							<span className="py-1 px-2 border border-primary-muted rounded-full text-white font-bold">
-								{savedWorkouts.length}
-							</span>
-						</div>
-					</div>
+					</Link>
 				</nav>
 				{/* Mobile menu button */}
 				<button
@@ -107,13 +103,6 @@ const Navbar = () => {
 				>
 					<div className="flex justify-between wrapper pl-6 py-4">
 						<div className="flex flex-col gap-1.5 mt-15">
-							<Link
-								onClick={() => closeNav()}
-								href="/"
-								className={`py-1 px-3 rounded-xl mr-4 ${pathname === "/" ? "text-primary bg-primary-muted" : "text-muted"}`}
-							>
-								Home
-							</Link>
 							<Link
 								onClick={() => closeNav()}
 								href="/workouts"

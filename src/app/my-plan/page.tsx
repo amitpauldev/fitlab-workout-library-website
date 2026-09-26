@@ -25,6 +25,12 @@ const MyPlan = () => {
 			} else {
 				return b.duration - a.duration;
 			}
+		} else if (sortBy === "calories") {
+			if (sortOrder === "asc") {
+				return a.caloriesBurned - b.caloriesBurned;
+			} else {
+				return b.caloriesBurned - a.caloriesBurned;
+			}
 		} else if (sortBy === "rating") {
 			if (sortOrder === "asc") {
 				return a.rating - b.rating;
@@ -42,6 +48,12 @@ const MyPlan = () => {
 			} else {
 				return b.duration - a.duration;
 			}
+		} else if (sortBy === "calories") {
+			if (sortOrder === "asc") {
+				return a.caloriesBurned - b.caloriesBurned;
+			} else {
+				return b.caloriesBurned - a.caloriesBurned;
+			}
 		} else if (sortBy === "rating") {
 			if (sortOrder === "asc") {
 				return a.rating - b.rating;
@@ -53,7 +65,7 @@ const MyPlan = () => {
 	});
 
 	return (
-		<main className="container mx-auto w-full mt-15 px-4 py-8 md:px-6 lg:py-12">
+		<main className="min-h-screen container mx-auto w-full mt-15 px-4 py-8 md:px-6 lg:py-12">
 			<div>
 				{/* Title */}
 				<h1 className="text-2xl font-black uppercase tracking-wide md:text-3xl">
@@ -133,6 +145,9 @@ const MyPlan = () => {
 					>
 						<option value="duration" className="bg-card text-white rounded-2xl">
 							Duration
+						</option>
+						<option value="calories" className="bg-card text-white rounded-2xl">
+							Calories
 						</option>
 						<option value="rating" className="bg-card text-white">
 							Rating

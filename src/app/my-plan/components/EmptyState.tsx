@@ -11,7 +11,7 @@ const EmptyState = () => {
 
 				<Link href="workouts">
 					<button className="mt-8 flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-medium text-black transition-opacity hover:opacity-90 cursor-pointer">
-						Browse workouts
+						Go to workouts
 					</button>
 				</Link>
 			</div>

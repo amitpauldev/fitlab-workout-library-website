@@ -11,8 +11,8 @@ const Footer = () => {
 				</span>
 			</div>
 			<div className="">
-				<p className="text-[12px] text-muted">
-					© 2026 FITLOG. All rights reserved.
+				<p className="text-[12px] text-muted text-wrap">
+					© 2026 FitLog — Workout Library. Train hard, log honest.
 				</p>
 			</div>
 		</footer>

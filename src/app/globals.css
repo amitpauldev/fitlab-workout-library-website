@@ -13,6 +13,9 @@
 	--blackish: #090a0d;
 	--stroke-muted: #1c1f26;
 }
+html {
+	scroll-behavior: smooth;
+}
 
 @theme {
 	--color-primary: var(--primary);
