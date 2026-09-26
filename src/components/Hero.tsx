@@ -17,9 +17,9 @@ const Hero = () => {
 						place to get started.
 					</p>
 					<Link href="/workouts">
-						<button className="bg-primary text-sm font-bold text-black py-2 px-4 rounded-md cursor-pointer hover:opacity-80">
+						<span className="inline-block bg-primary text-sm font-bold text-black py-2 px-4 rounded-md cursor-pointer hover:opacity-80">
 							BROWSE WORKOUTS
-						</button>
+						</span>
 					</Link>
 				</div>
 
